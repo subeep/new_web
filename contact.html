@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact — Avgarde®</title>
+  <meta name="description" content="Request an Avgarde® product brochure or tell us about your use case. Email info@avgardesystems.com.">
+  <meta name="theme-color" content="#060a11">
+  <meta property="og:title" content="Contact — Avgarde®">
+  <meta property="og:description" content="Request an Avgarde® product brochure or tell us about your use case. Email info@avgardesystems.com.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23060a11'/%3E%3Cpath d='M16 5 6 27h5l5-11 5 11h5z' fill='%2338a0ff'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="pages.css">
+</head>
+<body data-page="contact">
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="Avgarde home">
+      <img src="assets/logo-dark.png" alt="Avgarde® — Reimagining Wireless" width="150" height="50">
+    </a>
+    <nav class="nav__links" id="navLinks" aria-label="Primary">
+      <a href="technology.html" data-page="technology">Technology</a>
+      <a href="products.html" data-page="products">Products</a>
+      <a href="markets.html" data-page="markets">Markets</a>
+      <a href="company.html" data-page="company">Company</a>
+      <a href="contact.html" class="btn btn--sm btn--primary" data-page="contact">Get in touch</a>
+    </nav>
+    <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero">
+    <div class="hero__grid-bg" aria-hidden="true"></div>
+    <div class="container">
+      <nav class="crumbs reveal" aria-label="Breadcrumb">
+        <a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Contact</span>
+      </nav>
+      <p class="eyebrow reveal">Get in touch</p>
+      <h1 class="reveal">Secure your <span class="grad">airspace.</span></h1>
+      <p class="lead reveal">Register for a product brochure or tell us about your use case. Our team will get back to you.</p>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section section--contact" id="contact">
+    <div class="container contact">
+      <div class="contact__intro reveal">
+        <div class="contact__block">
+          <p class="eyebrow">Email</p>
+          <h2>Write to the team.</h2>
+          <p>Prefer your own email client? Reach us directly — or use the form to send a structured request.</p>
+          <a class="contact__mail" href="mailto:info@avgardesystems.com">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            info@avgardesystems.com
+          </a>
+        </div>
+
+        <div class="contact__block">
+          <h3 class="contact__h3">Offices</h3>
+          <ul class="olist">
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              <span><b>Bangalore</b><small>India</small></span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              <span><b>Guwahati</b><small>India</small></span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="contact__block">
+          <h3 class="contact__h3">Request types</h3>
+          <dl class="rtypes">
+            <div><dt>Product brochure</dt><dd>Register to receive the Avgarde® product brochure.</dd></div>
+            <div><dt>Other</dt><dd>Tell us about your use case and our team will get back to you.</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="contact__form reveal">
+        <form class="form" id="contactForm" novalidate aria-labelledby="formTitle" aria-describedby="formHint">
+          <div class="form__head">
+            <h2 class="form__title" id="formTitle">Send a request</h2>
+            <p class="form__req">All fields are required.</p>
+          </div>
+          <div class="form__row">
+            <label for="f-first">First name<input id="f-first" name="first" required autocomplete="given-name"></label>
+            <label for="f-last">Last name<input id="f-last" name="last" required autocomplete="family-name"></label>
+          </div>
+          <label for="f-org">Organisation<input id="f-org" name="org" required autocomplete="organization"></label>
+          <div class="form__row">
+            <label for="f-email">Email<input id="f-email" type="email" name="email" required autocomplete="email"></label>
+            <label for="f-phone">Phone<input id="f-phone" type="tel" name="phone" required autocomplete="tel"></label>
+          </div>
+          <fieldset>
+            <legend>Request</legend>
+            <label class="radio" for="f-req-brochure"><input id="f-req-brochure" type="radio" name="req" value="Product Brochure" checked><span>Product brochure</span></label>
+            <label class="radio" for="f-req-other"><input id="f-req-other" type="radio" name="req" value="Other"><span>Other</span></label>
+          </fieldset>
+          <label for="f-msg">Message<textarea id="f-msg" name="msg" rows="4" required></textarea></label>
+          <button type="submit" class="btn btn--primary btn--block">Send request</button>
+          <p class="form__note" id="formNote" role="status"></p>
+        </form>
+        <p class="form__hint" id="formHint">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>
+          <span>Submitting opens your email app with a pre-filled message to info@avgardesystems.com — nothing is sent until you press send there.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" aria-label="Avgarde home"><img src="assets/logo-dark.png" alt="Avgarde®" width="120" height="40"></a>
+        <p>AI-enabled situational awareness and aerial object sensing for the low-altitude airspace.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="technology.html">Technology</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="markets.html">Markets</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="company.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="https://avgarde.net/terms-of-use">Terms of Use</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:info@avgardesystems.com">info@avgardesystems.com</a></li>
+          <li>Bangalore · Guwahati, India</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© <span id="year">2026</span> AVGARDE®. All rights reserved.</p>
+      <p>Reimagining Wireless</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

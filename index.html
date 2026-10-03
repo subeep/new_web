@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Avgarde® — AI-Enabled Airspace Management</title>
+  <meta name="description" content="Avgarde® is a deeptech startup building the DroneAstra™ platform — AI-enabled radar sensing, aerial object detection and drone countermeasures for the low-altitude airspace.">
+  <meta name="theme-color" content="#060a11">
+  <meta property="og:title" content="Avgarde® — AI-Enabled Airspace Management">
+  <meta property="og:description" content="Avgarde® is a deeptech startup building the DroneAstra™ platform — AI-enabled radar sensing, aerial object detection and drone countermeasures for the low-altitude airspace.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23060a11'/%3E%3Cpath d='M16 5 6 27h5l5-11 5 11h5z' fill='%2338a0ff'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="home.css">
+</head>
+<body data-page="home">
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="Avgarde home">
+      <img src="assets/logo-dark.png" alt="Avgarde® — Reimagining Wireless" width="150" height="50">
+    </a>
+    <nav class="nav__links" id="navLinks" aria-label="Primary">
+      <a href="technology.html" data-page="technology">Technology</a>
+      <a href="products.html" data-page="products">Products</a>
+      <a href="markets.html" data-page="markets">Markets</a>
+      <a href="company.html" data-page="company">Company</a>
+      <a href="contact.html" class="btn btn--sm btn--primary" data-page="contact">Get in touch</a>
+    </nav>
+    <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- Pick the story layout before it renders: 3D scroll story, a single static 3D frame
+     (reduced motion), or the plain stacked layout (no WebGL / no JS). home3d.js can
+     still fall back to .no-3d at runtime via window.__storyFail(). -->
+<script>
+(function () {
+  var d = document.documentElement, ok = false;
+  try {
+    var c = document.createElement('canvas');
+    var gl = c.getContext('webgl2') || c.getContext('webgl');
+    ok = !!gl;
+    var lose = gl && gl.getExtension('WEBGL_lose_context');
+    if (lose) lose.loseContext();
+  } catch (e) { ok = false; }
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  d.classList.add(ok ? (reduce ? 'story-static' : 'story-3d') : 'no-3d');
+  window.__storyFail = function () {
+    if (d.classList.contains('no-3d')) return;
+    d.classList.remove('story-3d', 'story-static');
+    d.classList.add('no-3d');
+    if (window.__storyTeardown) try { window.__storyTeardown(); } catch (e) {}
+  };
+  // if the module never starts (blocked / offline), fall back to the stacked layout
+  if (ok) setTimeout(function () { if (!window.__storyBoot) window.__storyFail(); }, 9000);
+})();
+</script>
+
+<!-- ================= SCROLL STORY: DroneAstra™ detecting a drone ================= -->
+<section class="story" id="story" aria-label="How the DroneAstra platform detects and defeats a drone">
+  <div class="story__sticky" id="storyStage">
+
+    <div class="story__view">
+      <div class="story__backdrop" aria-hidden="true"><div class="story__grid"></div><div class="story__rings"></div></div>
+      <canvas class="story__canvas" id="storyCanvas" aria-hidden="true"></canvas>
+      <div class="story__scrim" aria-hidden="true"></div>
+      <div class="story__loader" aria-hidden="true"><span></span>Initialising sensors</div>
+
+      <!-- labels anchored to 3D objects (positioned by home3d.js) -->
+      <div class="story__labels" aria-hidden="true">
+        <div class="tag3d" data-anchor="radar"><b>DroneDOOT™</b><span>3D X-band radar</span></div>
+        <div class="tag3d tag3d--red tag3d--below" data-anchor="yug"><b>DroneYUG™</b><span>Soft-kill EW</span></div>
+        <div class="tag3d tag3d--green" data-anchor="pad"><b>LZ</b><span>Safe landing zone</span></div>
+      </div>
+
+      <!-- target lock reticle, follows the drone -->
+      <div class="lock" id="lock" aria-hidden="true" data-state="contact">
+        <div class="lock__box"><i></i><i></i><i></i><i></i><span class="lock__ping"></span></div>
+        <span class="lock__hint">Unknown contact</span>
+        <div class="lock__tag">
+          <p class="lock__id"><span>TGT-01</span> <b data-lock="cls">UNKNOWN</b></p>
+          <dl class="lock__data">
+            <div><dt>RNG</dt><dd data-lock="rng">—</dd></div>
+            <div><dt>ALT</dt><dd data-lock="alt">—</dd></div>
+            <div><dt>BRG</dt><dd data-lock="brg">—</dd></div>
+            <div><dt>SPD</dt><dd data-lock="spd">—</dd></div>
+          </dl>
+          <p class="lock__status" data-lock="status">TRACKING</p>
+        </div>
+      </div>
+
+      <!-- console chrome -->
+      <div class="hud hud--top" aria-hidden="true">
+        <span class="hud__brand"><i class="hud__live"></i>DRONEASTRA™ // LIVE</span>
+        <span class="hud__item hud__coord" data-hud="coord">TGT X —&nbsp; Y —</span>
+        <span class="hud__item" data-hud="mode">MODE SCAN</span>
+        <span class="hud__threat"><i></i>THREATS <b data-hud="threats">0</b></span>
+      </div>
+      <div class="hud hud--bottom" aria-hidden="true">
+        <span data-hud="az">AZ 000.0°</span>
+        <span>RNG 5.0 KM</span>
+        <span>COV 360°</span>
+        <span class="hud__gap"></span>
+        <span class="hud__sim">Illustrative simulation</span>
+        <span data-hud="clock">T+00:00.0</span>
+      </div>
+
+      <!-- intro / hero -->
+      <div class="story__intro" id="storyIntro">
+        <div class="container">
+          <div class="story__introInner">
+            <a href="company.html" class="badge">
+              <span class="badge__dot"></span>
+              DRDO Dare To Dream 4.0 — Innovation Contest Winner
+            </a>
+            <h1>Total awareness of the <span class="grad">low-altitude</span> airspace.</h1>
+            <p class="lead">
+              The DroneAstra™ platform fuses AI, radar and RF sensing to detect, classify and neutralise
+              drones, UAVs and other aerial objects — in real time.
+            </p>
+            <div class="hero__cta">
+              <a href="products.html" class="btn btn--primary">Explore products
+                <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <a href="contact.html" class="btn btn--ghost">Request brochure</a>
+            </div>
+          </div>
+        </div>
+        <p class="story__cue" aria-hidden="true"><span></span>Scroll to detect</p>
+      </div>
+    </div>
+
+    <!-- stage captions: overlays in the 3D story, stacked cards otherwise -->
+    <div class="story__caps">
+      <header class="story__head container">
+        <p class="eyebrow">DroneAstra™ in action</p>
+        <h2>From first return to safe landing.</h2>
+        <p class="section__sub">How the platform senses, tracks, classifies and neutralises a rogue drone — one integrated stack, from signal to decision.</p>
+      </header>
+
+      <div class="container story__capsInner">
+        <article class="cap" id="stage-sense" data-in="0.15" data-out="0.335">
+          <p class="cap__eyebrow"><span>01</span>Sense</p>
+          <h2 class="cap__title">Unknown object enters the airspace.</h2>
+          <p class="cap__text">DroneDOOT™, a 3D track-and-scan X-band radar, watches the full 360° around the site out to a 5&nbsp;km instrumented range — 24/7.</p>
+          <ul class="cap__facts">
+            <li><b>5 km</b>instrumented range</li>
+            <li><b>360°</b>azimuth</li>
+            <li><b>24/7</b>scan &amp; track</li>
+          </ul>
+        </article>
+
+        <article class="cap" id="stage-detect" data-in="0.355" data-out="0.535">
+          <p class="cap__eyebrow"><span>02</span>Detect &amp; track</p>
+          <h2 class="cap__title">Locked on — tracked in three dimensions.</h2>
+          <p class="cap__text">A deep neural model extends detection range by 30% over conventional systems, while SVM-based clutter cancellation lifts target detection by 60%.</p>
+          <ul class="cap__facts">
+            <li><b>+30%</b>detection range</li>
+            <li><b>+60%</b>target detection</li>
+            <li><b>−35%</b>time-to-compute</li>
+          </ul>
+        </article>
+
+        <article class="cap cap--classify" id="stage-classify" data-in="0.555" data-out="0.735">
+          <p class="cap__eyebrow"><span>03</span>Classify</p>
+          <h2 class="cap__title">Drone, bird or clutter? Micro-Doppler decides.</h2>
+          <p class="cap__text">A proprietary deep neural model reads the micro-Doppler signature of spinning rotors and auto-classifies the target.</p>
+          <div class="cls">
+            <div class="cls__head"><span>MICRO-DOPPLER · TGT-01</span><span class="cls__live"><i></i>AI</span></div>
+            <div class="cls__spec"><canvas id="specCanvas" width="320" height="96" aria-hidden="true"></canvas><span class="cls__axis" aria-hidden="true">Doppler ↕ · time →</span></div>
+            <ul class="cls__bars">
+              <li style="--v:.97"><span>Drone</span><i></i><b data-bar="0">97%</b></li>
+              <li style="--v:.02"><span>Bird</span><i></i><b data-bar="1">2%</b></li>
+              <li style="--v:.01"><span>Clutter</span><i></i><b data-bar="2">1%</b></li>
+            </ul>
+            <p class="cls__result" data-cls="result">DRONE · QUADCOPTER · 97%</p>
+          </div>
+        </article>
+
+        <article class="cap cap--ew" id="stage-neutralise" data-in="0.755" data-out="0.915">
+          <p class="cap__eyebrow"><span>04</span>Neutralise</p>
+          <h2 class="cap__title">Soft-kill. Then a safe landing.</h2>
+          <p class="cap__text">DroneYUG™ jams the drone’s FHSS links at long range, and its integrated GPS spoofer steers it down to a safe landing for forensic analysis.</p>
+          <ol class="ew">
+            <li data-at="0.785"><i></i>Link jammed</li>
+            <li data-at="0.825"><i></i>GNSS spoofed</li>
+            <li data-at="0.905"><i></i>Safe landing</li>
+          </ol>
+        </article>
+
+        <article class="cap cap--outro" id="stage-outro" data-in="0.93" data-out="1.5">
+          <p class="cap__eyebrow">Airspace secure · threats 0</p>
+          <h2 class="cap__title">One platform. Detect, identify, defeat.</h2>
+          <p class="cap__text">Sense, process, classify and respond — the DroneAstra™ stack, from signal to decision.</p>
+          <a class="btn btn--ghost" href="technology.html">Explore the technology
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </article>
+      </div>
+    </div>
+
+    <nav class="rail" aria-label="Story stages">
+      <span class="rail__track" aria-hidden="true"><span class="rail__fill"></span></span>
+      <ol>
+        <li><button type="button" data-go="0.255"><span class="rail__num">01</span><span class="rail__name">Sense</span></button></li>
+        <li><button type="button" data-go="0.455"><span class="rail__num">02</span><span class="rail__name">Detect &amp; track</span></button></li>
+        <li><button type="button" data-go="0.655"><span class="rail__num">03</span><span class="rail__name">Classify</span></button></li>
+        <li><button type="button" data-go="0.845"><span class="rail__num">04</span><span class="rail__name">Neutralise</span></button></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- ================= PLATFORM STATS ================= -->
+<section class="section home-stats" aria-labelledby="statsTitle">
+  <div class="container">
+    <div class="home-stats__head">
+      <header class="section__head reveal">
+        <p class="eyebrow">The DroneAstra™ Platform</p>
+        <h2 id="statsTitle">One integrated stack — from signal to decision.</h2>
+        <p class="section__sub">A proprietary deep neural model for micro-Doppler signature classification, paired with a parallel algorithm for low-latency range-Doppler mapping.</p>
+      </header>
+      <a class="more reveal" href="technology.html">How the technology works</a>
+    </div>
+    <dl class="stats">
+      <div class="stat reveal"><dt>Detection range gain</dt><dd><span data-count="30">0</span><small>%</small></dd><p>vs. conventional systems, via deep neural AI</p></div>
+      <div class="stat reveal"><dt>Target detection</dt><dd>+<span data-count="60">0</span><small>%</small></dd><p>with SVM-based clutter cancellation</p></div>
+      <div class="stat reveal"><dt>Faster compute</dt><dd><span data-count="35">0</span><small>%</small></dd><p>FPGA high-throughput waveform streaming</p></div>
+      <div class="stat reveal"><dt>Coverage</dt><dd><span data-count="360">0</span><small>°</small></dd><p>azimuthal, 24/7 scan and tracking</p></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ================= PRODUCTS TEASER ================= -->
+<section class="section section--alt" aria-labelledby="prodTitle">
+  <div class="container">
+    <div class="teaser__head">
+      <header class="section__head reveal">
+        <p class="eyebrow">Products</p>
+        <h2 id="prodTitle">Detect. Identify. Defeat.</h2>
+        <p class="section__sub">Six modular products spanning the full counter-drone kill chain — interoperable with each other and with third-party platforms.</p>
+      </header>
+      <a class="btn btn--ghost btn--sm reveal" href="products.html">All products</a>
+    </div>
+
+    <div class="pgrid">
+      <a class="pcard reveal" href="products.html#dronedoot">
+        <div class="pcard__art">
+          <svg viewBox="0 0 200 120" aria-hidden="true">
+            <g class="art-rings"><circle cx="100" cy="100" r="30"/><circle cx="100" cy="100" r="55"/><circle cx="100" cy="100" r="80"/></g>
+            <path class="art-sweep" d="M100 100 L100 20 A80 80 0 0 1 165 55 Z"/>
+            <circle cx="140" cy="48" r="3.5" class="art-blip"/>
+            <circle cx="62" cy="62" r="3" class="art-blip art-blip--2"/>
+            <rect x="92" y="96" width="16" height="10" rx="2" class="art-solid"/>
+          </svg>
+        </div>
+        <div class="pcard__body">
+          <span class="tag tag--detect">Active detection</span>
+          <h3>DroneDOOT<sup>™</sup></h3>
+          <p>3D Active Radar-Based Drone Detector</p>
+          <span class="more">View details</span>
+        </div>
+      </a>
+
+      <a class="pcard reveal" href="products.html#dronesense">
+        <div class="pcard__art">
+          <svg viewBox="0 0 200 120" aria-hidden="true">
+            <path class="art-wave" d="M0 70 Q12 40 25 70 T50 70 T75 70 T100 70 T125 70 T150 70 T175 70 T200 70"/>
+            <path class="art-wave art-wave--2" d="M0 70 Q6 55 12 70 T24 70 T36 70 T48 70 T60 70 T72 70 T84 70 T96 70 T108 70 T120 70 T132 70 T144 70 T156 70 T168 70 T180 70 T192 70 T204 70"/>
+            <g class="art-bars">
+              <rect x="30" y="92" width="8" height="18"/><rect x="44" y="84" width="8" height="26"/><rect x="58" y="96" width="8" height="14"/>
+              <rect x="72" y="78" width="8" height="32"/><rect x="86" y="88" width="8" height="22"/><rect x="100" y="72" width="8" height="38" class="hot"/>
+              <rect x="114" y="86" width="8" height="24"/><rect x="128" y="94" width="8" height="16"/><rect x="142" y="82" width="8" height="28"/><rect x="156" y="98" width="8" height="12"/>
+            </g>
+          </svg>
+        </div>
+        <div class="pcard__body">
+          <span class="tag tag--detect">Passive detection</span>
+          <h3>DroneSENSE<sup>™</sup></h3>
+          <p>Wide-Band RF-Based Passive Drone Detector</p>
+          <span class="more">View details</span>
+        </div>
+      </a>
+
+      <a class="pcard reveal" href="products.html#droneyug">
+        <div class="pcard__art">
+          <svg viewBox="0 0 200 120" aria-hidden="true">
+            <g class="art-rings art-rings--warn"><circle cx="100" cy="60" r="18"/><circle cx="100" cy="60" r="34"/><circle cx="100" cy="60" r="50"/></g>
+            <g class="art-drone" transform="translate(100 60)">
+              <path d="M-14 -14 L14 14 M14 -14 L-14 14"/>
+              <circle cx="-14" cy="-14" r="6"/><circle cx="14" cy="-14" r="6"/><circle cx="-14" cy="14" r="6"/><circle cx="14" cy="14" r="6"/>
+              <rect x="-5" y="-5" width="10" height="10" rx="2" class="art-solid"/>
+            </g>
+            <path class="art-dash" d="M100 90 V116"/>
+          </svg>
+        </div>
+        <div class="pcard__body">
+          <span class="tag tag--counter">Soft-kill EW</span>
+          <h3>DroneYUG<sup>™</sup></h3>
+          <p>Soft-Kill Drone Countermeasure System</p>
+          <span class="more">View details</span>
+        </div>
+      </a>
+
+      <a class="pcard reveal" href="products.html#dronearm">
+        <div class="pcard__art">
+          <svg viewBox="0 0 200 120" aria-hidden="true">
+            <path class="art-solid-stroke" d="M30 70 h70 l10 -10 h30 v20 h-30 l-6 6 h-20 l-6 20 h-12 l4 -20 h-40z"/>
+            <g class="art-beam"><path d="M142 64 L195 40"/><path d="M142 70 L198 70"/><path d="M142 76 L195 100"/></g>
+          </svg>
+        </div>
+        <div class="pcard__body">
+          <span class="tag tag--counter">Handheld</span>
+          <h3>DroneARM<sup>™</sup></h3>
+          <p>Handheld Drone Jammer Gun</p>
+          <span class="more">View details</span>
+        </div>
+      </a>
+
+      <a class="pcard reveal" href="products.html#dronewall">
+        <div class="pcard__art">
+          <svg viewBox="0 0 200 120" aria-hidden="true">
+            <g class="art-wall">
+              <rect x="40" y="20" width="14" height="80" rx="3"/><rect x="66" y="20" width="14" height="80" rx="3"/>
+              <rect x="92" y="20" width="14" height="80" rx="3"/><rect x="118" y="20" width="14" height="80" rx="3"/><rect x="144" y="20" width="14" height="80" rx="3"/>
+            </g>
+          </svg>
+        </div>
+        <div class="pcard__body">
+          <span class="tag tag--counter">All-band</span>
+          <h3>DroneWALL<sup>™</sup> / DIWAR<sup>™</sup></h3>
+          <p>Parametric Drone Jammer</p>
+          <span class="more">View details</span>
+        </div>
+      </a>
+
+      <a class="pcard reveal" href="products.html#dronedrishti">
+        <div class="pcard__art">
+          <svg viewBox="0 0 200 120" aria-hidden="true">
+            <g class="art-drone art-drone--ok" transform="translate(100 66)">
+              <path d="M-14 -14 L14 14 M14 -14 L-14 14"/>
+              <circle cx="-14" cy="-14" r="6"/><circle cx="14" cy="-14" r="6"/><circle cx="-14" cy="14" r="6"/><circle cx="14" cy="14" r="6"/>
+              <rect x="-5" y="-5" width="10" height="10" rx="2" class="art-solid"/>
+            </g>
+            <g class="art-id"><path d="M82 30 a26 26 0 0 1 36 0"/><path d="M74 22 a38 38 0 0 1 52 0"/></g>
+            <text x="138" y="34" class="art-label">IFF · OK</text>
+          </svg>
+        </div>
+        <div class="pcard__body">
+          <span class="tag tag--identify">Friend or foe</span>
+          <h3>DroneDRISHTI<sup>™</sup></h3>
+          <p>Remote ID Broadcaster for IFF Drones</p>
+          <span class="more">View details</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MARKETS TEASER ================= -->
+<section class="section" aria-labelledby="mktTitle">
+  <div class="container">
+    <div class="teaser__head">
+      <header class="section__head reveal">
+        <p class="eyebrow">Markets</p>
+        <h2 id="mktTitle">Built for the places that can’t afford a blind spot.</h2>
+      </header>
+      <a class="btn btn--ghost btn--sm reveal" href="markets.html">All markets</a>
+    </div>
+
+    <div class="mgrid">
+      <a class="mcard reveal" href="markets.html#m-airport">
+        <span class="mcard__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 16l20-6-2-3-7 2-5-6H6l2 7-4 1-2-2H1z M3 21h18"/></svg></span>
+        <h3>Airports &amp; Aircraft Safety</h3>
+        <p>360° aerial situational awareness to protect aircraft, passengers and airport assets — and fewer shutdowns from drone intrusions.</p>
+        <span class="more">Explore</span>
+      </a>
+      <a class="mcard reveal" href="markets.html#m-infra">
+        <span class="mcard__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21V9l5 3V9l5 3V5h4l1 16zM3 21h18"/></svg></span>
+        <h3>Critical Infrastructure</h3>
+        <p>Over 70% of global critical infrastructure is unprotected from aerial risks. Enforce ‘no drone zones’ with multi-layered PIDS.</p>
+        <span class="more">Explore</span>
+      </a>
+      <a class="mcard reveal" href="markets.html#m-utm">
+        <span class="mcard__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="19" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="17" cy="17" r="2"/><path d="M7 18l8-1M6.5 17.5l11-11M17 15V7"/></svg></span>
+        <h3>UAV Traffic Management</h3>
+        <p>Precise real-time tracking of large numbers of drones, with airspace intelligence for fleet operators and logistics networks.</p>
+        <span class="more">Explore</span>
+      </a>
+      <a class="mcard reveal" href="markets.html#m-mil">
+        <span class="mcard__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/></svg></span>
+        <h3>Military &amp; Security</h3>
+        <p>Detect, classify, mitigate and report threats — 360° coverage, 24/7 scan and tracking, and soft-kill EW countermeasures.</p>
+        <span class="more">Explore</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RECOGNITION + PARTNERS ================= -->
+<section class="section section--alt home-trust" aria-labelledby="trustTitle">
+  <div class="container trust">
+    <div class="trust__award reveal">
+      <span class="trust__medal" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg></span>
+      <p class="eyebrow">Recognition</p>
+      <h2 id="trustTitle">Winner — DRDO Dare To Dream 4.0 Innovation Contest</h2>
+      <p>AVGARDE® is a radio frequency, radar sensing and wireless technology deeptech startup based in Bangalore and Guwahati, with research at IISc Bangalore and IIT Guwahati.</p>
+      <a class="more" href="company.html">About Avgarde</a>
+    </div>
+    <div class="trust__partners reveal">
+      <p class="partners__label">Incubators &amp; partners</p>
+      <div class="partners__row">
+        <div class="partner"><img src="assets/iisc.jpeg" alt="Indian Institute of Science, Bangalore" loading="lazy" width="400" height="400"></div>
+        <div class="partner"><img src="assets/iitg-logo.png" alt="IIT Guwahati" loading="lazy" width="400" height="400"></div>
+        <div class="partner"><img src="assets/iitg.jpeg" alt="IIT Guwahati Technology Incubation Centre" loading="lazy" width="200" height="200"></div>
+        <div class="partner"><img src="assets/fsid.jpeg" alt="Foundation for Science Innovation and Development" loading="lazy" width="200" height="200"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-band__box reveal">
+      <div>
+        <h2>Secure your airspace.</h2>
+        <p>Register for a product brochure or tell us about your use case. Our team will get back to you.</p>
+      </div>
+      <div class="cta-band__actions">
+        <a class="btn btn--primary" href="contact.html?req=other">Get in touch</a>
+        <a class="btn btn--ghost" href="contact.html">Request brochure</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" aria-label="Avgarde home"><img src="assets/logo-dark.png" alt="Avgarde®" width="120" height="40"></a>
+        <p>AI-enabled situational awareness and aerial object sensing for the low-altitude airspace.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="technology.html">Technology</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="markets.html">Markets</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="company.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="https://avgarde.net/terms-of-use">Terms of Use</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:info@avgardesystems.com">info@avgardesystems.com</a></li>
+          <li>Bangalore · Guwahati, India</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© <span id="year">2026</span> AVGARDE®. All rights reserved.</p>
+      <p>Reimagining Wireless</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+} }
+</script>
+<script type="module" src="home3d.js" onerror="window.__storyFail && window.__storyFail()"></script>
+</body>
+</html>

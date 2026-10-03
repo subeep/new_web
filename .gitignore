@@ -1,0 +1,19 @@
+# Dependencies & environment
+.env
+.env.local
+.env.*.local
+node_modules/
+
+# IDE & Editor files
+.vscode/
+.idea/
+.claude/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Vercel
+.vercel/

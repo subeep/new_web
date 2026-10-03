@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Technology — Avgarde®</title>
+  <meta name="description" content="The DroneAstra™ platform: active 3D radar and passive RF sensing, FPGA processing and deep neural micro-Doppler classification, with soft-kill countermeasures.">
+  <meta name="theme-color" content="#060a11">
+  <meta property="og:title" content="Technology — Avgarde®">
+  <meta property="og:description" content="The DroneAstra™ platform: active 3D radar and passive RF sensing, FPGA processing and deep neural micro-Doppler classification, with soft-kill countermeasures.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23060a11'/%3E%3Cpath d='M16 5 6 27h5l5-11 5 11h5z' fill='%2338a0ff'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="pages.css">
+</head>
+<body data-page="technology">
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="Avgarde home">
+      <img src="assets/logo-dark.png" alt="Avgarde® — Reimagining Wireless" width="150" height="50">
+    </a>
+    <nav class="nav__links" id="navLinks" aria-label="Primary">
+      <a href="technology.html" data-page="technology">Technology</a>
+      <a href="products.html" data-page="products">Products</a>
+      <a href="markets.html" data-page="markets">Markets</a>
+      <a href="company.html" data-page="company">Company</a>
+      <a href="contact.html" class="btn btn--sm btn--primary" data-page="contact">Get in touch</a>
+    </nav>
+    <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero">
+    <div class="hero__grid-bg" aria-hidden="true"></div>
+    <div class="container">
+      <div class="page-hero__inner">
+        <div class="page-hero__copy">
+          <nav class="crumbs reveal" aria-label="Breadcrumb">
+            <a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Technology</span>
+          </nav>
+          <p class="eyebrow reveal">Technology</p>
+          <h1 class="reveal">The <span class="grad">DroneAstra<sup class="tm">™</sup></span> Platform</h1>
+          <p class="lead reveal">
+            The DroneAstra™ platform fuses AI, radar and RF sensing to detect, classify and neutralise
+            drones, UAVs and other aerial objects — in real time.
+          </p>
+          <div class="hero__cta page-hero__cta reveal">
+            <a href="#pipeline" class="btn btn--primary">How it works</a>
+            <a href="products.html" class="btn btn--ghost">See the products</a>
+          </div>
+        </div>
+
+        <div class="page-hero__visual reveal" aria-hidden="true">
+          <div class="radar">
+            <canvas id="radar"></canvas>
+            <div class="radar__hud radar__hud--tl"><span class="mono">RNG</span> 5.0 km</div>
+            <div class="radar__hud radar__hud--tr"><span class="mono">AZ</span> 360°</div>
+            <div class="radar__hud radar__hud--bl"><span class="mono">MODE</span> TRACK&nbsp;+&nbsp;SCAN</div>
+            <div class="radar__hud radar__hud--br"><span class="dot dot--red"></span><span id="threatCount">2</span> threats</div>
+          </div>
+        </div>
+      </div>
+
+      <dl class="stats">
+        <div class="stat reveal"><dt>Detection range gain</dt><dd><span data-count="30">30</span><small>%</small></dd><p>vs. conventional systems, via deep neural AI</p></div>
+        <div class="stat reveal"><dt>Target detection</dt><dd>+<span data-count="60">60</span><small>%</small></dd><p>with SVM-based clutter cancellation</p></div>
+        <div class="stat reveal"><dt>Faster compute</dt><dd><span data-count="35">35</span><small>%</small></dd><p>FPGA high-throughput waveform streaming</p></div>
+        <div class="stat reveal"><dt>Coverage</dt><dd><span data-count="360">360</span><small>°</small></dd><p>azimuthal, 24/7 scan and tracking</p></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ PIPELINE ============ -->
+  <section class="section" id="pipeline">
+    <div class="container">
+      <header class="section__head reveal">
+        <p class="eyebrow">How it works</p>
+        <h2>One integrated stack — from signal to decision.</h2>
+        <p class="section__sub">
+          A proprietary deep neural model for micro-Doppler signature classification, paired with a parallel
+          algorithm for low-latency range-Doppler mapping. The result: actionable data, decisioning tools and
+          countermeasures for drones, UAVs, birds and other aerial objects.
+        </p>
+      </header>
+
+      <div class="pipeline reveal">
+        <div class="pipe">
+          <div class="pipe__icon">
+            <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 32V18" /><path d="M13 12a10 10 0 0 1 14 0M9 8a15 15 0 0 1 22 0M17 16a4 4 0 0 1 6 0"/><circle cx="20" cy="19" r="1.6" class="fill"/></svg>
+          </div>
+          <span class="pipe__step mono">01</span>
+          <h3>Sense</h3>
+          <p>Active 3D radar and passive wide-band RF sensors on a Software Defined Radio architecture.</p>
+        </div>
+        <div class="pipe__arrow" aria-hidden="true"></div>
+        <div class="pipe">
+          <div class="pipe__icon">
+            <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 22h5l3-10 4 18 4-22 4 18 3-8 3 4h6"/></svg>
+          </div>
+          <span class="pipe__step mono">02</span>
+          <h3>Process</h3>
+          <p>FPGA waveform streaming, clutter reduction and motion-artifact cancellation.</p>
+        </div>
+        <div class="pipe__arrow" aria-hidden="true"></div>
+        <div class="pipe">
+          <div class="pipe__icon">
+            <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="10" cy="12" r="3"/><circle cx="10" cy="28" r="3"/><circle cx="20" cy="20" r="3"/><circle cx="30" cy="12" r="3"/><circle cx="30" cy="28" r="3"/><path d="M13 13l4 5M13 27l4-5M23 18l4-5M23 22l4 5"/></svg>
+          </div>
+          <span class="pipe__step mono">03</span>
+          <h3>Classify</h3>
+          <p>Deep neural AI auto-classifies micro-Doppler signatures — drone, UAV, bird or clutter.</p>
+        </div>
+        <div class="pipe__arrow" aria-hidden="true"></div>
+        <div class="pipe">
+          <div class="pipe__icon">
+            <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 5l12 5v9c0 8-5 13-12 16-7-3-12-8-12-16v-9z"/><path d="M15 20l4 4 7-8"/></svg>
+          </div>
+          <span class="pipe__step mono">04</span>
+          <h3>Respond</h3>
+          <p>Soft-kill jamming, GNSS spoofing and safe-landing countermeasures.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ADVANTAGES ============ -->
+  <section class="section section--alt" id="advantages">
+    <div class="container">
+      <header class="section__head reveal">
+        <p class="eyebrow">Advantages</p>
+        <h2>Six advantages built into the stack.</h2>
+        <p class="section__sub">From the neural model to the radio architecture, each layer is engineered for range, accuracy and speed.</p>
+      </header>
+
+      <div class="adv">
+        <article class="adv__card reveal">
+          <h3>Deep neural detection</h3>
+          <p>AI model enhances detection range by 30% compared to conventional systems.</p>
+        </article>
+        <article class="adv__card reveal">
+          <h3>Auto-classification</h3>
+          <p>Automatic classification of aerial targets for effective management of Low Altitude Airspace (LAA).</p>
+        </article>
+        <article class="adv__card reveal">
+          <h3>Clutter cancellation</h3>
+          <p>Clutter reduction plus SVM-based clutter cancellation improve target detection by 60%.</p>
+        </article>
+        <article class="adv__card reveal">
+          <h3>Motion artifact removal</h3>
+          <p>A dedicated cancellation algorithm improves classification of radar signatures.</p>
+        </article>
+        <article class="adv__card reveal">
+          <h3>FPGA acceleration</h3>
+          <p>High-throughput waveform streaming through an FPGA reduces time-to-compute by 35%.</p>
+        </article>
+        <article class="adv__card reveal">
+          <h3>SDR architecture</h3>
+          <p>Software Defined Radio for scalability, modularity and reconfigurability — with an easy, operator-friendly UI.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW THE PRODUCTS FIT ============ -->
+  <section class="section" id="fit">
+    <div class="container">
+      <header class="section__head reveal">
+        <p class="eyebrow">How the products fit</p>
+        <h2>Every stage of the pipeline, covered.</h2>
+        <p class="section__sub">Six modular products map onto the DroneAstra™ pipeline — interoperable with each other and with third-party platforms.</p>
+      </header>
+
+      <ol class="fit">
+        <li class="fit__step reveal">
+          <div class="fit__head"><h3>Sense</h3><span class="fit__num mono">01</span></div>
+          <p class="fit__role">Active and passive detection</p>
+          <ul class="fit__list">
+            <li><a class="fit__link" href="products.html#dronedoot"><b>DroneDOOT™</b><span>3D active radar · 5 km range · 360° azimuth</span></a></li>
+            <li><a class="fit__link" href="products.html#dronesense"><b>DroneSENSE™</b><span>Wide-band RF passive detector · any make or model</span></a></li>
+          </ul>
+        </li>
+        <li class="fit__step reveal">
+          <div class="fit__head"><h3>Process</h3><span class="fit__num mono">02</span></div>
+          <p class="fit__role">The platform layer</p>
+          <ul class="fit__list">
+            <li><a class="fit__link" href="#advantages"><b>FPGA acceleration</b><span>35% faster time-to-compute</span></a></li>
+            <li><a class="fit__link" href="#advantages"><b>Clutter cancellation</b><span>SVM-based · +60% target detection</span></a></li>
+          </ul>
+        </li>
+        <li class="fit__step fit__step--identify reveal">
+          <div class="fit__head"><h3>Classify</h3><span class="fit__num mono">03</span></div>
+          <p class="fit__role">Target type and friend or foe</p>
+          <ul class="fit__list">
+            <li><a class="fit__link" href="products.html#dronedoot"><b>DroneDOOT™</b><span>Backend AI engine classifies target types</span></a></li>
+            <li><a class="fit__link" href="products.html#dronedrishti"><b>DroneDRISHTI™</b><span>IFF remote ID · white-list vs. black-list</span></a></li>
+          </ul>
+        </li>
+        <li class="fit__step fit__step--counter reveal">
+          <div class="fit__head"><h3>Respond</h3><span class="fit__num mono">04</span></div>
+          <p class="fit__role">Soft-kill countermeasures</p>
+          <ul class="fit__list">
+            <li><a class="fit__link" href="products.html#droneyug"><b>DroneYUG™</b><span>FHSS jamming · GPS spoofing · safe landing</span></a></li>
+            <li><a class="fit__link" href="products.html#dronearm"><b>DroneARM™</b><span>Handheld jammer gun</span></a></li>
+            <li><a class="fit__link" href="products.html#dronewall"><b>DroneWALL™ / DIWAR™</b><span>All-band parametric jammer</span></a></li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta-band">
+    <div class="container">
+      <div class="cta-band__box reveal">
+        <div>
+          <h2>Get the full technical picture.</h2>
+          <p>Register for a product brochure or tell us about your use case. Our team will get back to you.</p>
+        </div>
+        <div class="cta-band__actions">
+          <a href="contact.html" class="btn btn--primary">Request brochure</a>
+          <a href="contact.html?req=other" class="btn btn--ghost">Talk to us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" aria-label="Avgarde home"><img src="assets/logo-dark.png" alt="Avgarde®" width="120" height="40"></a>
+        <p>AI-enabled situational awareness and aerial object sensing for the low-altitude airspace.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="technology.html">Technology</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="markets.html">Markets</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="company.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="https://avgarde.net/terms-of-use">Terms of Use</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:info@avgardesystems.com">info@avgardesystems.com</a></li>
+          <li>Bangalore · Guwahati, India</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© <span id="year">2026</span> AVGARDE®. All rights reserved.</p>
+      <p>Reimagining Wireless</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
