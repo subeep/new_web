@@ -143,6 +143,32 @@
     form.addEventListener('input', e => { e.target.classList.remove('is-invalid'); e.target.removeAttribute('aria-invalid'); });
   }
 
+
+  /* ---------- horizontal card scroller (product pages: "Explore the other products") ---------- */
+  const scroller = $('[data-scroller]');
+  if (scroller) {
+    const section = scroller.closest('section') || document;
+    const prev = $('[data-scroll="prev"]', section), next = $('[data-scroll="next"]', section);
+    const step = () => {
+      const card = scroller.firstElementChild; if (!card) return scroller.clientWidth;
+      return card.getBoundingClientRect().width + (parseFloat(getComputedStyle(scroller).columnGap) || 20);
+    };
+    const sync = () => {
+      const max = scroller.scrollWidth - scroller.clientWidth - 2;
+      if (prev) prev.disabled = scroller.scrollLeft <= 2;
+      if (next) next.disabled = scroller.scrollLeft >= max;
+    };
+    prev && prev.addEventListener('click', () => scroller.scrollBy({ left: -step() * (innerWidth > 1024 ? 3 : 1), behavior: reduced ? 'auto' : 'smooth' }));
+    next && next.addEventListener('click', () => scroller.scrollBy({ left: step() * (innerWidth > 1024 ? 3 : 1), behavior: reduced ? 'auto' : 'smooth' }));
+    scroller.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    scroller.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); scroller.scrollBy({ left: step(), behavior: 'smooth' }); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); scroller.scrollBy({ left: -step(), behavior: 'smooth' }); }
+    });
+    sync();
+  }
+
   const year = $('#year');
   if (year) year.textContent = new Date().getFullYear();
 

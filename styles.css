@@ -442,3 +442,6 @@ legend { font-size: 13px; font-weight: 500; color: var(--muted); margin-bottom: 
 /* skip link */
 .skip { position: absolute; left: 16px; top: -60px; z-index: 100; padding: 10px 16px; border-radius: 8px; background: var(--blue); color: #04101e; font-weight: 600; transition: top .2s; }
 .skip:focus { top: 12px; }
+
+/* footer: plain-text items match the link colour */
+.footer__col ul { color: var(--muted); }

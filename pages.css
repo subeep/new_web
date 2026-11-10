@@ -183,3 +183,31 @@
 @media (prefers-reduced-motion: reduce) {
   .office__ping { display: none; }
 }
+
+/* link from a catalogue card to its product page */
+.product__more { margin-top: 14px; }
+.product details + .product__more { align-self: flex-start; }
+
+/* product card photos */
+.product__art { height: 200px; overflow: hidden; background: #0b121d; place-items: stretch; }
+.product__art img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+.product__art::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(6,10,17,.35), transparent 35%, transparent 60%, rgba(6,10,17,.4)); }
+.product__art .tag { z-index: 1; background: rgba(6,10,17,.78); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.product:hover .product__art img { transform: scale(1.04); }
+
+/* keep the radar head in frame */
+.product__art img[src*="front/dronedoot"] { object-position: center 30%; }
+
+/* whole card is the link: stretched title link */
+.product { position: relative; cursor: pointer; }
+.product__link { color: inherit; }
+.product__link::after { content: ""; position: absolute; inset: 0; z-index: 2; border-radius: inherit; }
+.product:has(.product__link:focus-visible) { outline: 2px solid var(--blue); outline-offset: 3px; }
+.product__link:focus-visible { outline: none; }
+.product__body { flex: 1; }
+.product .specs { margin-bottom: 0; }
+
+/* spec chips wrap instead of clipping when a card is narrow */
+.product .specs { grid-template-columns: repeat(auto-fit, minmax(92px, 1fr)); }
+.product .specs li { min-width: 0; }
+.product .specs--bands { grid-template-columns: repeat(auto-fit, minmax(56px, 1fr)); }

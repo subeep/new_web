@@ -1,0 +1,36 @@
+/* Terms of Use page */
+.terms { padding-top: 72px; }
+.terms__grid { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 64px; align-items: start; }
+
+.terms__toc { position: sticky; top: 96px; max-height: calc(100vh - 120px); overflow: auto; padding: 22px; border-radius: var(--radius); border: 1px solid var(--line); background: var(--surface); }
+.terms__toc-label { font-size: 11px; color: var(--faint); letter-spacing: .08em; text-transform: uppercase; margin: 0 0 14px; }
+.terms__toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.terms__toc a { display: flex; gap: 12px; padding: 8px 10px; border-radius: 8px; font-size: 13.5px; line-height: 1.4; color: var(--muted); transition: color .2s, background .2s; }
+.terms__toc a .mono { flex: none; font-size: 11px; color: var(--faint); padding-top: 2px; }
+.terms__toc a:hover { color: var(--text); background: rgba(255,255,255,.03); }
+.terms__toc a.is-current { color: var(--text); background: rgba(56,160,255,.1); }
+.terms__toc a.is-current .mono { color: var(--blue); }
+
+.terms__body { max-width: 780px; }
+.terms__body p { color: var(--muted); font-size: 15.5px; line-height: 1.8; margin: 0 0 18px; }
+.terms__body p strong { color: var(--text); font-weight: 600; }
+.terms__body p a, .terms__body a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.terms__body h2 {
+  display: flex; align-items: baseline; gap: 16px; font-size: clamp(22px, 2.4vw, 28px); font-weight: 600; letter-spacing: -.01em;
+  margin: 56px 0 20px; padding-top: 32px; border-top: 1px solid var(--line); scroll-margin-top: 96px;
+}
+.terms__body h2:first-of-type { margin-top: 40px; }
+.terms__n { flex: none; font-size: 13px; font-weight: 500; color: var(--blue); }
+.terms__body h3 { font-size: 17px; font-weight: 600; margin: 32px 0 12px; color: var(--text); letter-spacing: 0; scroll-margin-top: 96px; }
+.terms__end { text-align: center; margin-top: 56px !important; padding-top: 28px; border-top: 1px solid var(--line); font-size: 12px !important; letter-spacing: .1em; text-transform: uppercase; color: var(--faint) !important; }
+
+@media (max-width: 960px) {
+  .terms__grid { grid-template-columns: 1fr; gap: 32px; }
+  .terms__toc { position: static; max-height: none; }
+  .terms__toc ol { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .terms { padding-top: 48px; }
+  .terms__toc ol { grid-template-columns: 1fr; }
+  .terms__body p { font-size: 15px; }
+}

@@ -450,3 +450,15 @@ html.story-3d .rail { opacity: var(--railv, 1); transition: opacity .4s; }
 @media (prefers-reduced-motion: reduce) {
   .story__rings::after, .story__loader span::after { animation: none; }
 }
+
+/* product card photos */
+.pcard__art { position: relative; height: 190px; overflow: hidden; background: #0b121d; place-items: stretch; }
+.pcard__art img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+.pcard__art::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, transparent 55%, rgba(6,10,17,.45)); }
+.pcard:hover .pcard__art img { transform: scale(1.04); }
+@media (max-width: 600px) {
+  .pcard__art { height: auto; min-height: 112px; }
+}
+
+/* keep the radar head in frame */
+.pcard__art img[src*="front/dronedoot"] { object-position: center 30%; }
